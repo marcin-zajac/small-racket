@@ -24,3 +24,6 @@ yarn-error.log*
 
 # my project icon
 desktop.ini
+
+# enviorment file
+.env
