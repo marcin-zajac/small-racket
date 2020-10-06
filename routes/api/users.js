@@ -3,9 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
-const passport = require('passport');
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const jwt = require('jsonwebtoken');
 
 // @route    POST api/users/register
 // @desc     Register user
@@ -56,7 +54,6 @@ router.post(
 // @route    POST api/users/login
 // @desc     Login user
 // @access   Public
-// router.post('/login', (req, res) => res.json({ response: 'value' }));
 router.post(
   '/login',
   [
@@ -69,30 +66,44 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    try {
-        const options = {
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: process.env.PUB_KEY,
-            algorithms: ['RS256']
-          };
 
-          passport.use( new JwtStrategy(options, (jwt_payload, done) => {
-            User.findOne({id: jwt_payload.sub}, function(err, user) {
-        
-                // This flow look familiar?  It is the same as when we implemented
-                // the `passport-local` strategy
-                if (err) {
-                    return done(err, false);
-                }
-                if (user) {
-                    return done(null, user);
-                } else {
-                    return done(null, false);
-                }
-                
-            })
-          }))
-    } catch (error) {}
+    const { email, password } = req.body;
+    try {
+      let user = await User.findOne({ email });
+
+      if (!user) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
+
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        process.env.KEY,
+        { expiresIn: '5 days' },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server error');
+    }
   }
 );
 
