@@ -16,6 +16,7 @@ router.post(
     check('password', 'Password must have minimum six letters').isLength({
       min: 6,
     }),
+    check("role", "You can create accouunt only as worker or manager type").not().equals("Admin")
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -31,7 +32,7 @@ router.post(
           .json({ errors: [{ msg: 'User already exists' }] });
       }
 
-      const { firstName, lastName, email, password } = req.body;
+      const { firstName, lastName, email, password, role } = req.body;
       const salt = await bcrypt.genSalt(10);
 
       const newUser = new User({
@@ -39,6 +40,7 @@ router.post(
         lastName,
         password: await bcrypt.hash(password, salt),
         email,
+        role
       });
 
       await newUser.save();
