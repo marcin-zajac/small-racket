@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../../middleware/auth');
 const bcrypt = require('bcrypt');
 const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
@@ -16,7 +17,9 @@ router.post(
     check('password', 'Password must have minimum six letters').isLength({
       min: 6,
     }),
-    check("role", "You can create accouunt only as worker or manager type").not().equals("Admin")
+    check('role', 'You can create accouunt only as worker or manager type')
+      .not()
+      .equals('Admin'),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -40,7 +43,7 @@ router.post(
         lastName,
         password: await bcrypt.hash(password, salt),
         email,
-        role
+        role,
       });
 
       await newUser.save();
@@ -108,5 +111,23 @@ router.post(
     }
   }
 );
+
+// @route    GET api/users/login
+// @desc     get all users
+// @access   Private
+router.get('/all', auth, async (req, res) => {
+  try {
+    const filter = {};
+    const all = await User.find(filter);
+    if (!all) {
+      return res.status(400).json({ msg: 'There is no users' });
+    }
+
+    res.json(all);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

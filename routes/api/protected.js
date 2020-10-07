@@ -7,7 +7,6 @@ module.exports = router.get('/adminRoute', [auth, checkAdmin], (req, res) => {
   res.json(req.user);
 });
 
-
 module.exports = router.get('/', auth, (req, res) => {
   res.json(req.user);
 });

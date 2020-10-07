@@ -1,5 +1,5 @@
 {
-  "name": "small-racket",
+  "name": "small-roket",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,6 +20,8 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
+    "develop": "react-scripts start && nodemon server",
+    "api": "nodemon server",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

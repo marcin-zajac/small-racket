@@ -26,9 +26,9 @@ app.get('/api', function (req, res) {
 
 app.use('/api/users', require('./routes/api/users'));
 app.use('/protected', require('./routes/api/protected'));
-
-app.get('/', function (req, res) {
-  res.send('main route');
+app.use(express.static("public"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
