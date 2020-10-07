@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const utils = require('../config/utils');
 const UserSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
@@ -18,7 +19,7 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['Admin', 'Worker', 'Manager'],
+    enum: Object.values(utils.roles),
     default: 'Worker',
   },
 });
