@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import api from '../../utils/api';
 
 export const RegisterPage = () => {
@@ -22,39 +26,41 @@ export const RegisterPage = () => {
   };
   return (
     <>
-      <h3>Register view</h3>
-
       <form onSubmit={onSubmit}>
-        <ul>
-          <li>
-            <input
-              type="email"
-              placeholder="email adress"
+        <Container maxWidth="xs">
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="stretch"
+            spacing={201}
+          >
+            <TextField
               name="email"
-              value={email}
+              label="Email"
+              type="email"
               onChange={onChange}
+              value={email}
             />
-          </li>
-          <li>
-            <input
-              type="text"
+            <TextField
               name="password"
-              placeholder="password"
+              label="password"
+              type="password"
               value={password}
               onChange={onChange}
             />
-          </li>
-          <li>
-            <input
-              type="password"
+            <TextField
               name="password2"
-              placeholder="retype password"
+              label="retype password"
+              type="password"
               value={password2}
               onChange={onChange}
             />
-          </li>
-        </ul>
-        <input type="submit" value="Register" />
+            <Button type="submit" variant="outlined">
+              register
+            </Button>
+          </Grid>
+        </Container>
       </form>
     </>
   );

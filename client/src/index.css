@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* My dev styles */
 }
-body {
+/* body {
   background-color: #0f111a;
   color: white;
   display: flex;
@@ -34,7 +34,7 @@ a:hover {
 
 a:active {
   color: #60d6f6;
-}
+} */
 /* End of dev styles */
 
 code {

@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import api from '../../utils/api';
 
 export const LoginPage = () => {
@@ -19,30 +23,37 @@ export const LoginPage = () => {
   };
   return (
     <>
-      <h3>Login view</h3>
       <form onSubmit={onSubmit}>
-        <ul>
-          <li>
-            <input
+        <Container maxWidth="xs" mt={2}>
+          <Grid
+            container
+            direction="column"
+            justify="space-between"
+            alignItems="stretch"
+          >
+            <TextField
               type="email"
               name="email"
-              placeholder="email adress"
-              value={email}
+              id="standard-basic"
+              label="Email"
+              type="email"
               onChange={onChange}
+              value={email}
             />
-          </li>
-          <li>
-            <input
+            <TextField
               type="text"
               name="password"
-              placeholder="password"
+              id="standard-basic"
+              label="password"
+              type="password"
               value={password}
               onChange={onChange}
             />
-          </li>
-        </ul>
-        {/* <button type="submit"  >Send your message</button> */}
-        <input type="submit" value="Login" />
+            <Button type="submit" variant="outlined">
+              login
+            </Button>
+          </Grid>
+        </Container>
       </form>
     </>
   );
