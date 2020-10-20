@@ -1,29 +1,37 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { LoginPage } from './views/LoginPage/LoginPage';
-import { RegisterPage } from './views/RegisterPage/RegisterPage';
+import { LoginForm } from './components/organisms/LoginForm/LoginForm';
 import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import { Navigation } from './components/Navigation/Navigation';
+import { Navigation } from './components/molecues/Navigation/Navigation';
+import { Typography } from '@material-ui/core';
+
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { RegisterForm } from './components/organisms/RegisterForm/RegisterForm';
 
 function App() {
   return (
     <Router>
-      <Container container maxWidth="sm" align="center">
-        <Link to="/">
-          <h2>///Small Rocket 🚀</h2>
-        </Link>
-        <Navigation />
-        <Switch>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/register">
-            <RegisterPage />
-          </Route>
-        </Switch>
-      </Container>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container container maxWidth="sm" align="center">
+          <Link to="/">
+            <Typography variant="h4" component="h1">
+            ///Small Rocket 🚀
+            </Typography>
+          </Link>
+          <Navigation />
+          <Switch>
+            <Route path="/login">
+              <LoginForm />
+            </Route>
+            <Route path="/register">
+              <RegisterForm />
+            </Route>
+          </Switch>
+        </Container>
+      </ThemeProvider>
     </Router>
   );
 }

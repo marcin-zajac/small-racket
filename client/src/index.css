@@ -7,35 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* My dev styles */
 }
-/* body {
-  background-color: #0f111a;
-  color: white;
-  display: flex;
-  justify-content: center;
-}
-ul {
-  padding: 0;
-  list-style-type: none;
-}
 
-a:link {
-  text-decoration: none;
-  color: #60d6f6;
-}
 
-a:visited {
-  text-decoration: none;
-  color: #60d6f6;
-}
-
-a:hover {
-  color: red;
-}
-
-a:active {
-  color: #60d6f6;
-} */
-/* End of dev styles */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

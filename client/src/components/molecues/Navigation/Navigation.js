@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Button from '@material-ui/core/Button';
+import { Button, ButtonGroup } from '@material-ui/core';
 export const Navigation = () => {
   return (
     <nav>
-      <ButtonGroup fullWidth variant="text" color="primary">
+      <ButtonGroup fullWidth size="small" variant="text" color="primary">
         <Button component={Link} to="/login">
           login
         </Button>
