@@ -8,7 +8,6 @@ const theme = createMuiTheme({
           WebkitFontSmoothing: 'auto',
         },
         body: {
-          // backgroundColor: '#0F111A',
           backgroundColor: '#d5dfec',
           color: 'white',
           display: 'flex',
