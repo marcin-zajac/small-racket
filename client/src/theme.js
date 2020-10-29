@@ -10,8 +10,6 @@ const theme = createMuiTheme({
         body: {
           backgroundColor: '#d5dfec',
           color: 'white',
-          display: 'flex',
-          justifyContent: 'center',
         },
         formBtn: {
           marginTop: 20,
