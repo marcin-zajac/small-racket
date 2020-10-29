@@ -12,38 +12,32 @@ import Dashboard from './components/pages/Dashboard';
 
 function App() {
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Container maxWidth="sm" align="center">
-          <Switch>
-            <Route exact path="/">
-              <Link to="/">
+    <>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Route path="/auth">
+            <Container maxWidth="sm" align="center">
+              <Link to="/auth">
                 <AppLogo />
               </Link>
               <Navigation />
-            </Route>
-            <Route path="/login">
-              <Link to="/">
-                <AppLogo />
-              </Link>
-              <Navigation />
-              <LoginForm />
-            </Route>
-            <Route path="/register">
-              <Link to="/">
-                <AppLogo />
-              </Link>
-              <Navigation />
-              <RegisterForm />
-            </Route>
-            <Route path="/dashboard">
+              <Switch>
+                <Route path="/auth/login">
+                  <LoginForm />
+                </Route>
+                <Route path="/auth/register">
+                  <RegisterForm />
+                </Route>
+              </Switch>
+            </Container>
+          </Route>
+          <Route exact path="/">
               <Dashboard />
-            </Route>
-          </Switch>
-        </Container>
-      </ThemeProvider>
-    </Router>
+          </Route>
+        </ThemeProvider>
+      </Router>
+    </>
   );
 }
 

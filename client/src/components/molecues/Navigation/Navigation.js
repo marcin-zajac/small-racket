@@ -20,10 +20,10 @@ export const Navigation = (props) => {
         color="primary"
         className={classes.root}
       >
-        <Button component={Link} to="/login">
+        <Button component={Link} to="/auth/login">
           login
         </Button>
-        <Button component={Link} to="/register">
+        <Button component={Link} to="/auth/register">
           register
         </Button>
       </ButtonGroup>
