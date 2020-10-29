@@ -7,8 +7,8 @@ import { LoginForm } from './components/molecues/LoginForm/LoginForm';
 import { RegisterForm } from './components/molecues/RegisterForm/RegisterForm';
 import { Navigation } from './components/molecues/Navigation/Navigation';
 import { ThemeProvider } from '@material-ui/core/styles';
-import AppLogo from './components/atoms/AppLogo'
-
+import AppLogo from './components/atoms/AppLogo';
+import Dashboard from './components/pages/Dashboard';
 
 function App() {
   return (
@@ -16,16 +16,29 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container maxWidth="sm" align="center">
-          <Link to="/">
-            <AppLogo/>
-          </Link>
-          <Navigation />
           <Switch>
+            <Route exact path="/">
+              <Link to="/">
+                <AppLogo />
+              </Link>
+              <Navigation />
+            </Route>
             <Route path="/login">
+              <Link to="/">
+                <AppLogo />
+              </Link>
+              <Navigation />
               <LoginForm />
             </Route>
             <Route path="/register">
+              <Link to="/">
+                <AppLogo />
+              </Link>
+              <Navigation />
               <RegisterForm />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
             </Route>
           </Switch>
         </Container>
