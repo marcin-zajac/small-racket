@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Grid, Button } from '@material-ui/core';
 import AppLogo from '../atoms/AppLogo';
 import { Link } from 'react-router-dom';
+import InWorkButtons from '../atoms/InWorkButtons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +28,7 @@ export default function AppBar() {
     >
       <Grid item>
         <Link to="/">
-          <Button variant="text" small color="primary" fullWidth>
+          <Button variant="text" color="primary" fullWidth>
             <AppLogo variant="h6" />{' '}
           </Button>
         </Link>
@@ -44,9 +45,7 @@ export default function AppBar() {
         </Button>
       </Grid>
       <Grid item>
-        <Button variant="contained" color="primary" fullWidth>
-          Item 2
-        </Button>
+<InWorkButtons/>
       </Grid>
       <Grid item xs={6}></Grid>
     </Grid>
