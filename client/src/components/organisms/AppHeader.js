@@ -1,17 +1,12 @@
 import React from 'react';
-import {
-  makeStyles,
-  Paper,
-  Grid,
-  Typography,
-  Button,
-} from '@material-ui/core';
+import { makeStyles, Paper, Grid, Typography, Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(4),
     display: 'flex',
     marginBottom: theme.spacing(2),
+    width: '100%',
   },
   icon: {
     width: theme.spacing(4),
@@ -41,18 +36,26 @@ export default function AppHeader() {
             component="div"
             className={classes.pageTitle}
           >
-            Title
+            View title
           </Typography>
           <Typography
             variant="subtitle2"
             component="div"
             className={classes.pageSubtitle}
           >
-            subtitle
+            and subtitle
           </Typography>
         </Grid>
         <Grid item>
-          AAA
+          <h2>
+            <span role="img" aria-label="🧨">
+              🧨
+            </span>{' '}
+            ACME TNT GENERATOR{' '}
+            <span role="img" aria-label="💥">
+              💥
+            </span>{' '}
+          </h2>
         </Grid>
         <Grid item>
           <Button variant="outlined">Logout</Button>
