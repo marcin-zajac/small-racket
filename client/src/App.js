@@ -15,7 +15,7 @@ function App() {
           <Route path="/auth">
             <AuthPage />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Redirect to="/user" />
           </Route>
           <Route path="/user">
