@@ -20,33 +20,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AppHeader() {
+export default function AppHeader({ title, subtitle }) {
   const classes = useStyles();
   return (
     <Paper component="div" className={classes.root}>
+      {/* TODO:Improve gid layout */}
       <Grid
         container
         alignItems="center"
         direction="row"
         justify="space-between"
       >
-        <Grid item>
+        <Grid item xs={1}>
           <Typography
             variant="h6"
             component="div"
             className={classes.pageTitle}
           >
-            View title
+            {title}
           </Typography>
           <Typography
             variant="subtitle2"
             component="div"
             className={classes.pageSubtitle}
           >
-            and subtitle
+            {subtitle}
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={1}>
           <h2>
             <span role="img" aria-label="🧨">
               🧨

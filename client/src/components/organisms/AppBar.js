@@ -35,17 +35,29 @@ export default function AppBar() {
       </Grid>
       <Grid item xs={2}></Grid>
       <Grid item>
-        <Button variant="contained" color="primary" fullWidth>
-          Item 1
+        <Button
+          component={Link}
+          to="/user/dashboard"
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
+          Who is on work?
         </Button>
       </Grid>
       <Grid item>
-        <Button variant="contained" color="primary" fullWidth>
-          Item 3
+        <Button
+          component={Link}
+          to="/user/helpdesk"
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
+          Helpdesk
         </Button>
       </Grid>
       <Grid item>
-<InWorkButtons/>
+        <InWorkButtons />
       </Grid>
       <Grid item xs={6}></Grid>
     </Grid>

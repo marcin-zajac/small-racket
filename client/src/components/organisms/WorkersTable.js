@@ -95,7 +95,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function UserTable() {
+export default function WorkersTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

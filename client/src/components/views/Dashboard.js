@@ -1,9 +1,9 @@
 import React from 'react';
 import AppBar from '../organisms/AppBar';
-import Workers from '../views/Workers';
+import Workers from '../organisms/Workers';
 import AppHeader from '../organisms/AppHeader';
 import { makeStyles } from '@material-ui/core';
-import UserTable from '../organisms/UserTable';
+import UserTable from '../organisms/WorkersTable';
 
 const useStyles = makeStyles({
   main: {

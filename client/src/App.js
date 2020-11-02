@@ -1,14 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Container from '@material-ui/core/Container';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import theme from './theme';
+import MainContent from './components/pages/MainContent';
+import AuthPage from './components/pages/AuthPage';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { LoginForm } from './components/molecues/LoginForm/LoginForm';
-import { RegisterForm } from './components/molecues/RegisterForm/RegisterForm';
-import { Navigation } from './components/molecues/Navigation/Navigation';
 import { ThemeProvider } from '@material-ui/core/styles';
-import AppLogo from './components/atoms/AppLogo';
-import Dashboard from './components/pages/Dashboard';
 
 function App() {
   return (
@@ -17,23 +13,13 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Route path="/auth">
-            <Container maxWidth="sm" align="center">
-              <Link to="/auth">
-                <AppLogo />
-              </Link>
-              <Navigation />
-              <Switch>
-                <Route path="/auth/login">
-                  <LoginForm />
-                </Route>
-                <Route path="/auth/register">
-                  <RegisterForm />
-                </Route>
-              </Switch>
-            </Container>
+            <AuthPage />
           </Route>
-          <Route exact path="/">
-              <Dashboard />
+          <Route path="/">
+            <Redirect to="/user" />
+          </Route>
+          <Route path="/user">
+            <MainContent />
           </Route>
         </ThemeProvider>
       </Router>
