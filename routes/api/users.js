@@ -8,6 +8,8 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const checkRole = require('../../middleware/checkRole');
 
+// TODO: move login and register to new auth endpoint
+
 // @route    POST api/users/register
 // @desc     Register new user
 // @access   Public

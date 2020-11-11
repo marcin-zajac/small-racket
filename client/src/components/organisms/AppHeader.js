@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles, Paper, Grid, Typography, Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +60,9 @@ export default function AppHeader({ title, subtitle }) {
           </h2>
         </Grid>
         <Grid item>
-          <Button variant="outlined">Logout</Button>
+          <Button variant="outlined" component={Link} to="/auth">
+            Logout
+          </Button>
         </Grid>
       </Grid>
     </Paper>
