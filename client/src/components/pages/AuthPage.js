@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import AppLogo from '../atoms/AppLogo';
-import { LoginForm } from '../molecues/LoginForm/LoginForm';
+import  LoginForm  from '../molecues/LoginForm/LoginForm';
 import { Navigation } from '../molecues/Navigation/Navigation';
-import { RegisterForm } from '../molecues/RegisterForm/RegisterForm';
+import RegisterForm from '../molecues/RegisterForm/RegisterForm';
 import { Container } from '@material-ui/core';
 
 export default function AuthPage() {

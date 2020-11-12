@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import api from '../../../utils/api';
 import FormButton from '../../atoms/FormButton';
 import { Slide, Paper, Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AuthIcon from '../../atoms/AuthIcon';
+import { register } from '../../../actions/auth';
+import { connect } from 'react-redux';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const RegisterForm = (props) => {
+const RegisterForm = ({register, ...props}) => {
   const classes = useStyles(props);
 
   const [formData, setformData] = useState({
@@ -29,10 +31,7 @@ export const RegisterForm = (props) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    const res = await api.post('/users/register', formData);
-
-    console.log(res);
+    register(email, password, password2)
   };
 
   const onChange = (e) => {
@@ -96,3 +95,6 @@ export const RegisterForm = (props) => {
     </>
   );
 };
+
+
+export default connect(null, {register}) (RegisterForm)

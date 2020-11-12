@@ -25,6 +25,7 @@ app.get('/api', function (req, res) {
 });
 
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
 app.use('/protected', require('./routes/api/protected'));
 app.use(express.static("public"));
 app.get("/", (req, res) => {

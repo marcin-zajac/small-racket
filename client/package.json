@@ -42,7 +42,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/",
+  "proxy": "http://127.0.0.1:5000/",
   "devDependencies": {
     "@babel/core": "^7.12.0",
     "@storybook/addon-actions": "^6.0.26",

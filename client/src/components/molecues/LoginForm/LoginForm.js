@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import api from '../../../utils/api';
+import PropTypes from 'prop-types';
+
 import { Slide, TextField, Paper, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import FormButton from '../../atoms/FormButton';
 import AuthIcon from '../../atoms/AuthIcon';
+import { login } from '../../../actions/auth';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const LoginForm = (props) => {
+ const LoginForm = ({login, ...props}) => {
   const classes = useStyles(props);
   const [formData, setformData] = useState({
     email: '',
@@ -24,11 +27,11 @@ export const LoginForm = (props) => {
   });
   const { email, password } = formData;
 
-  // TODO: Handle submit form to server
-  const onSubmit = async (e) => {
+  // TODO: Handle errors from server
+  const onSubmit = (e) => {
     e.preventDefault();
-    const res = await api.post('/users/login', formData);
-    console.log(res);
+    console.log("Component");
+    login(email, password);
   };
 
   const onChange = (e) => {
@@ -82,3 +85,12 @@ export const LoginForm = (props) => {
     </>
   );
 };
+
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+// const mapStateToProps = state => ({
+//   login: state.login
+// })
+export default connect(null, {login})(LoginForm)

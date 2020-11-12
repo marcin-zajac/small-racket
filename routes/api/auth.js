@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+const User = require('../../models/User');
+
 
 // @route    POST api/users/register
 // @desc     Register new user
@@ -109,3 +111,5 @@ router.post(
     }
   }
 );
+
+module.exports = router;
