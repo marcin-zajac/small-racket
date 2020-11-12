@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- const LoginForm = ({login, ...props}) => {
+const LoginForm = ({ login, errors, ...props }) => {
   const classes = useStyles(props);
   const [formData, setformData] = useState({
     email: '',
@@ -30,12 +30,27 @@ const useStyles = makeStyles((theme) => ({
   // TODO: Handle errors from server
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("Component");
     login(email, password);
   };
 
   const onChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const getHelper = (inputType) => {
+    const helper = {
+      isError: null,
+      message: '',
+    };
+    if (errors) {
+      errors.forEach((error) => {
+        if (error.param === inputType) {
+          helper.isError = true;
+          helper.message = error.msg;
+        }
+      });
+    }
+    return helper;
   };
 
   return (
@@ -54,6 +69,8 @@ const useStyles = makeStyles((theme) => ({
               </Grid>
               <Grid item>
                 <TextField
+                  error={getHelper('email').isError}
+                  helperText={getHelper('email').message}
                   type="email"
                   name="email"
                   id="standard-basic"
@@ -65,6 +82,8 @@ const useStyles = makeStyles((theme) => ({
               </Grid>
               <Grid item>
                 <TextField
+                  error={getHelper('password').isError}
+                  helperText={getHelper('password').message}
                   name="password"
                   id="standard-basic"
                   label="password"
@@ -90,7 +109,7 @@ LoginForm.propTypes = {
   login: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = state => ({
-//   login: state.login
-// })
-export default connect(null, {login})(LoginForm)
+const mapStateToProps = (state) => ({
+  errors: state.auth.errors,
+});
+export default connect(mapStateToProps, { login })(LoginForm);
