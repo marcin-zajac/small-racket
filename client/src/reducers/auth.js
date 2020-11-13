@@ -1,7 +1,8 @@
 import {
+  CLEAR_ERRORS,
   LOGIN_FAIL,
   // LOGIN_SUCESS,
-  // REGISTER_FAIL,
+  REGISTER_FAIL,
   // REGISTER_SUCESS,
   // LOGOUT,
   SET_ALERT,
@@ -16,7 +17,10 @@ export default function (state = initialState, action) {
     // case LOGIN_SUCESS:
     //   return { ...state};
     case LOGIN_FAIL:
+    case REGISTER_FAIL:
       return { ...state, errors: payload};
+    case CLEAR_ERRORS:
+      return { ...state, errors: []};
 
     default:
       return state;

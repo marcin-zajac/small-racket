@@ -7,6 +7,7 @@ import FormButton from '../../atoms/FormButton';
 import AuthIcon from '../../atoms/AuthIcon';
 import { login } from '../../../actions/auth';
 import { connect } from 'react-redux';
+import {getHelper} from '../../../utils/getHelper'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,22 +38,6 @@ const LoginForm = ({ login, errors, ...props }) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const getHelper = (inputType) => {
-    const helper = {
-      isError: null,
-      message: '',
-    };
-    if (errors) {
-      errors.forEach((error) => {
-        if (error.param === inputType) {
-          helper.isError = true;
-          helper.message = error.msg;
-        }
-      });
-    }
-    return helper;
-  };
-
   return (
     <>
       <Slide direction="right" in={true} mountOnEnter unmountOnExit>
@@ -69,8 +54,8 @@ const LoginForm = ({ login, errors, ...props }) => {
               </Grid>
               <Grid item>
                 <TextField
-                  error={getHelper('email').isError}
-                  helperText={getHelper('email').message}
+                  error={getHelper(errors, 'email').isError}
+                  helperText={getHelper(errors, 'email').message}
                   type="email"
                   name="email"
                   id="standard-basic"
@@ -82,8 +67,8 @@ const LoginForm = ({ login, errors, ...props }) => {
               </Grid>
               <Grid item>
                 <TextField
-                  error={getHelper('password').isError}
-                  helperText={getHelper('password').message}
+                  error={getHelper(errors, 'password').isError}
+                  helperText={getHelper(errors, 'password').message}
                   name="password"
                   id="standard-basic"
                   label="password"

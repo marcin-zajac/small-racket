@@ -1,25 +1,33 @@
 import api from '../utils/api';
-import { LOGIN_FAIL, SET_ALERT } from './types';
-import { setInputAlert } from './setInputAlert';
+import { CLEAR_ERRORS, LOGIN_FAIL, REGISTER_FAIL, SET_ALERT } from './types';
 
 export const login = (email, password) => async (dispatch) => {
   try {
     const res = await api.post('/auth/login', { email, password });
     console.log('TOKEN', res.data);
   } catch (error) {
+    const errors = error.response.data.errors;
+    if ((error && error.response.status === 400) || 500) {
+      console.log('status 400', error.response.data);
+      dispatch({ type: SET_ALERT, payload: errors });
+      return;
+    }
     if (error) {
       const errors = error.response.data.errors;
       dispatch({ type: LOGIN_FAIL, payload: errors });
-      if (error.response.status === 400 || 500) {
-        // TODO: handle invalid credentials
-        console.log('status 400');
-        dispatch({ type: SET_ALERT, payload: errors.msg });
-      }
     }
   }
 };
 
 export const register = (email, password, password2) => async (dispatch) => {
+  if (password !== password2) {
+    const errors = {
+      msg: 'Password do not match ',
+      param: 'password2',
+    };
+    dispatch({ type: REGISTER_FAIL, payload: [errors] });
+    return;
+  }
   try {
     const res = await api.post('/auth/register', {
       email,
@@ -28,11 +36,18 @@ export const register = (email, password, password2) => async (dispatch) => {
     });
     console.log(res.data);
   } catch (error) {
+    const errors = error.response.data.errors;
+    if ((error && error.response.status === 400) || 500) {
+      console.log('status 400', error.response.data);
+      dispatch({ type: SET_ALERT, payload: errors });
+      return;
+    }
     if (error) {
-      const errors = error.response.data.errors;
-      errors.forEach((error) => {
-        console.log(error.msg);
-      });
+      dispatch({ type: REGISTER_FAIL, payload: errors });
     }
   }
+};
+
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS, payload: [] });
 };

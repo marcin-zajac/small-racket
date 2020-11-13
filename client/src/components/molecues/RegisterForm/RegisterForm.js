@@ -3,10 +3,9 @@ import FormButton from '../../atoms/FormButton';
 import { Slide, Paper, Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AuthIcon from '../../atoms/AuthIcon';
-import { register } from '../../../actions/auth';
+import { register, clearErrors } from '../../../actions/auth';
 import { connect } from 'react-redux';
-
-
+import { getHelper } from '../../../utils/getHelper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RegisterForm = ({register, ...props}) => {
+const RegisterForm = ({ register, errors, clearErrors, ...props }) => {
   const classes = useStyles(props);
 
   const [formData, setformData] = useState({
@@ -31,11 +30,14 @@ const RegisterForm = ({register, ...props}) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    register(email, password, password2)
+    register(email, password, password2);
   };
 
   const onChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
+    if (password === e.target.value || password2 === e.target.value) {
+      clearErrors();
+    }
   };
 
   return (
@@ -55,6 +57,8 @@ const RegisterForm = ({register, ...props}) => {
 
               <Grid item>
                 <TextField
+                  error={getHelper(errors, 'email').isError}
+                  helperText={getHelper(errors, 'email').message}
                   name="email"
                   label="Email"
                   type="email"
@@ -65,6 +69,8 @@ const RegisterForm = ({register, ...props}) => {
               </Grid>
               <Grid>
                 <TextField
+                  error={getHelper(errors, 'password').isError}
+                  helperText={getHelper(errors, 'password').message}
                   name="password"
                   label="password"
                   type="password"
@@ -75,6 +81,8 @@ const RegisterForm = ({register, ...props}) => {
               </Grid>
               <Grid>
                 <TextField
+                  error={getHelper(errors, 'password2').isError}
+                  helperText={getHelper(errors, 'password2').message}
                   name="password2"
                   label="retype password"
                   type="password"
@@ -95,6 +103,9 @@ const RegisterForm = ({register, ...props}) => {
     </>
   );
 };
-
-
-export default connect(null, {register}) (RegisterForm)
+const mapStateToProps = (state) => ({
+  errors: state.auth.errors,
+});
+export default connect(mapStateToProps, { register, clearErrors })(
+  RegisterForm
+);
