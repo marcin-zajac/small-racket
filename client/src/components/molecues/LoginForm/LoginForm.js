@@ -7,7 +7,8 @@ import FormButton from '../../atoms/FormButton';
 import AuthIcon from '../../atoms/AuthIcon';
 import { login } from '../../../actions/auth';
 import { connect } from 'react-redux';
-import {getHelper} from '../../../utils/getHelper'
+import { getHelper } from '../../../utils/getHelper';
+import AlertMessage from '../../atoms/AlertMessage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,9 +16,10 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     marginTop: theme.spacing(5),
     width: '300px',
-    height: theme.spacing(50),
+    minHeight: theme.spacing(50),
     padding: theme.spacing(2),
   },
+  formBtn: { marginTop: theme.spacing(5) },
 }));
 
 const LoginForm = ({ login, errors, ...props }) => {
@@ -53,6 +55,9 @@ const LoginForm = ({ login, errors, ...props }) => {
                 <AuthIcon login />
               </Grid>
               <Grid item>
+                <AlertMessage severity="error" />
+              </Grid>
+              <Grid item>
                 <TextField
                   error={getHelper(errors, 'email').isError}
                   helperText={getHelper(errors, 'email').message}
@@ -79,7 +84,7 @@ const LoginForm = ({ login, errors, ...props }) => {
                 />
               </Grid>
               <Grid item sm></Grid>
-              <Grid>
+              <Grid className={classes.formBtn} item>
                 <FormButton value="login" />
               </Grid>
             </Grid>

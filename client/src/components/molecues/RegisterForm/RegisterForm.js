@@ -6,6 +6,7 @@ import AuthIcon from '../../atoms/AuthIcon';
 import { register, clearErrors } from '../../../actions/auth';
 import { connect } from 'react-redux';
 import { getHelper } from '../../../utils/getHelper';
+import AlertMessage from '../../atoms/AlertMessage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,12 +14,13 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     marginTop: theme.spacing(5),
     width: '300px',
-    height: theme.spacing(56),
+    minHeight: theme.spacing(56),
     padding: theme.spacing(2),
   },
+  formBtn: { marginTop: theme.spacing(5) },
 }));
 
-const RegisterForm = ({ register, errors, clearErrors, ...props }) => {
+const RegisterForm = ({ register, errors, clearErrors, alerts, ...props }) => {
   const classes = useStyles(props);
 
   const [formData, setformData] = useState({
@@ -53,6 +55,10 @@ const RegisterForm = ({ register, errors, clearErrors, ...props }) => {
             >
               <Grid item>
                 <AuthIcon register />
+              </Grid>
+
+              <Grid item>
+                <AlertMessage severity="error" />
               </Grid>
 
               <Grid item>
@@ -93,7 +99,7 @@ const RegisterForm = ({ register, errors, clearErrors, ...props }) => {
               </Grid>
               <Grid item sm></Grid>
 
-              <Grid item>
+              <Grid className={classes.formBtn} item>
                 <FormButton value="register" />
               </Grid>
             </Grid>
@@ -105,6 +111,7 @@ const RegisterForm = ({ register, errors, clearErrors, ...props }) => {
 };
 const mapStateToProps = (state) => ({
   errors: state.auth.errors,
+  alerts: state.alert,
 });
 export default connect(mapStateToProps, { register, clearErrors })(
   RegisterForm
