@@ -1,12 +1,17 @@
-import { SET_ALERT } from '../actions/types';
+import { LOGIN_ALERT, REGISTER_ALERT } from '../actions/types';
 
-const initialState = [];
+const initialState = {
+  loginAlert: [],
+  registerAlert: []
+}
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case SET_ALERT:
-      return payload;
+    case LOGIN_ALERT:
+      return {...state, loginAlert: payload};
+    case REGISTER_ALERT:
+      return {...state, registerAlert: payload};
 
     default:
       return state;

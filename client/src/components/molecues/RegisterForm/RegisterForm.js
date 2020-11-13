@@ -58,7 +58,7 @@ const RegisterForm = ({ register, errors, clearErrors, alerts, ...props }) => {
               </Grid>
 
               <Grid item>
-                <AlertMessage severity="error" />
+                <AlertMessage severity="error" type='registerAlert' />
               </Grid>
 
               <Grid item>

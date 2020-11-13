@@ -55,7 +55,7 @@ const LoginForm = ({ login, errors, ...props }) => {
                 <AuthIcon login />
               </Grid>
               <Grid item>
-                <AlertMessage severity="error" />
+                <AlertMessage severity="error" type="loginAlert"/>
               </Grid>
               <Grid item>
                 <TextField

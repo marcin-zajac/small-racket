@@ -1,5 +1,5 @@
 import api from '../utils/api';
-import { CLEAR_ERRORS, LOGIN_FAIL, REGISTER_FAIL, SET_ALERT } from './types';
+import { CLEAR_ERRORS, LOGIN_FAIL, REGISTER_FAIL, LOGIN_ALERT, REGISTER_ALERT } from './types';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -9,7 +9,7 @@ export const login = (email, password) => async (dispatch) => {
     const errors = error.response.data.errors;
     if ((error && error.response.status === 400) || 500) {
       console.log('status 400', error.response.data);
-      dispatch({ type: SET_ALERT, payload: errors });
+      dispatch({ type: LOGIN_ALERT, payload: errors });
       return;
     }
     if (error) {
@@ -39,7 +39,7 @@ export const register = (email, password, password2) => async (dispatch) => {
     const errors = error.response.data.errors;
     if ((error && error.response.status === 400) || 500) {
       console.log('status 400', error.response.data);
-      dispatch({ type: SET_ALERT, payload: errors });
+      dispatch({ type: REGISTER_ALERT, payload: errors });
       return;
     }
     if (error) {
