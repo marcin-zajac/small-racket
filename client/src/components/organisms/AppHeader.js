@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { makeStyles, Paper, Grid, Typography, Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { logout } from '../../actions/auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AppHeader({ title, subtitle }) {
+function AppHeader({ title, subtitle, logout }) {
   const classes = useStyles();
   return (
     <Paper component="div" className={classes.root}>
@@ -60,7 +63,12 @@ export default function AppHeader({ title, subtitle }) {
           </h2>
         </Grid>
         <Grid item>
-          <Button variant="outlined" component={Link} to="/auth">
+          <Button
+            variant="outlined"
+            component={Link}
+            // to="/"
+            onClick={logout}
+          >
             Logout
           </Button>
         </Grid>
@@ -68,3 +76,9 @@ export default function AppHeader({ title, subtitle }) {
     </Paper>
   );
 }
+
+AppHeader.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
+
+export default connect(null, { logout })(AppHeader);

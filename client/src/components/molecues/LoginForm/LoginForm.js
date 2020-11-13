@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import { Redirect } from 'react-router-dom';
 import { Slide, TextField, Paper, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import FormButton from '../../atoms/FormButton';
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   formBtn: { marginTop: theme.spacing(5) },
 }));
 
-const LoginForm = ({ login, errors, ...props }) => {
+const LoginForm = ({ login, errors, isAuthenticated, token, ...props }) => {
   const classes = useStyles(props);
   const [formData, setformData] = useState({
     email: '',
@@ -30,7 +30,6 @@ const LoginForm = ({ login, errors, ...props }) => {
   });
   const { email, password } = formData;
 
-  // TODO: Handle errors from server
   const onSubmit = (e) => {
     e.preventDefault();
     login(email, password);
@@ -39,6 +38,11 @@ const LoginForm = ({ login, errors, ...props }) => {
   const onChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  // Redirect if loged in
+  if (isAuthenticated) {
+    return <Redirect to="/user/dashboard" />;
+  }
 
   return (
     <>
@@ -55,7 +59,7 @@ const LoginForm = ({ login, errors, ...props }) => {
                 <AuthIcon login />
               </Grid>
               <Grid item>
-                <AlertMessage severity="error" type="loginAlert"/>
+                <AlertMessage severity="error" type="loginAlert" />
               </Grid>
               <Grid item>
                 <TextField
@@ -96,10 +100,15 @@ const LoginForm = ({ login, errors, ...props }) => {
 };
 
 LoginForm.propTypes = {
+  errors: PropTypes.array,
   login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.auth.errors,
+  isAuthenticated: state.auth.isAuthenticated,
+  token: state.auth.token,
 });
+
 export default connect(mapStateToProps, { login })(LoginForm);

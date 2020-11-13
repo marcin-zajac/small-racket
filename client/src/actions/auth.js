@@ -1,9 +1,21 @@
 import api from '../utils/api';
-import { CLEAR_ERRORS, LOGIN_FAIL, REGISTER_FAIL, LOGIN_ALERT, REGISTER_ALERT } from './types';
+import {
+  CLEAR_ERRORS,
+  LOGIN_FAIL,
+  REGISTER_FAIL,
+  LOGIN_ALERT,
+  REGISTER_ALERT,
+  LOGIN_SUCCESS,
+  LOGOUT,
+} from './types';
 
 export const login = (email, password) => async (dispatch) => {
   try {
     const res = await api.post('/auth/login', { email, password });
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data, // Token
+    });
     console.log('TOKEN', res.data);
   } catch (error) {
     const errors = error.response.data.errors;
@@ -46,6 +58,10 @@ export const register = (email, password, password2) => async (dispatch) => {
       dispatch({ type: REGISTER_FAIL, payload: errors });
     }
   }
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
 };
 
 export const clearErrors = () => (dispatch) => {
