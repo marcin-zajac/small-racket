@@ -11,8 +11,9 @@ import TableRow from '@material-ui/core/TableRow';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import Tooltip from '@material-ui/core/Tooltip';
+import { acmeWorkers } from '../../utils/placeholderData';
 
-const columns = [
+const headCells = [
   {
     id: 'workerName',
     label: 'Name',
@@ -55,66 +56,13 @@ function createData(workerName, department, email, phone, role, workStatus) {
   return { workerName, department, email, phone, workStatus };
 }
 
-const rows = [
-  createData('Bugs Bunny', 'ACME', 'bugs@acme.com', 111333555, true, true),
-  createData(
-    'Marvin TheMartian',
-    'ACME',
-    'marvin@acme.com',
-    111333555,
-    false,
-    true
-  ),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData('Yosemite Sam', 'ACME', 'sam@acme.com', 111333555, false, true),
-  createData('Daffy Duck', 'ACME', 'daffy@acme.com', 111333555, true, false),
-  createData('Porky Pig', 'ACME', 'porky@acme.com', 111333555, true, false),
-  createData(
-    'Wile E. Coyote',
-    'ACME',
-    'coyote@acme.com',
-    111333555,
-    true,
-    true
-  ),
-  createData(
-    'Tasmanian Devil',
-    'ACME',
-    't.devil@acme.com',
-    111333555,
-    undefined,
-    undefined
-  ),
-];
+
+
+const rows = [];
+acmeWorkers.forEach((worker) => {
+  const data = createData(...worker);
+  rows.push(data)
+});
 
 const useStyles = makeStyles({
   root: {
@@ -145,7 +93,8 @@ export default function WorkersTable() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {' '}
+              {headCells.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -161,8 +110,8 @@ export default function WorkersTable() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
+                  <TableRow hover tabIndex={-1} key={row.code}>
+                    {headCells.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>

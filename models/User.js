@@ -8,6 +8,13 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  phone: {
+    type: String,
+  },
+  department: {
+    type: String,
+    enum: Object.values(utils.departments),
+  },
   email_is_verified: {
     type: Boolean,
     default: false,
@@ -21,6 +28,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     enum: Object.values(utils.roles),
     default: 'Worker',
+  },
+  workStatus: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
 });
 
