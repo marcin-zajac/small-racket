@@ -7,6 +7,7 @@ import { register, clearErrors } from '../../../actions/auth';
 import { connect } from 'react-redux';
 import { getHelper } from '../../../utils/getHelper';
 import AlertMessage from '../../atoms/AlertMessage';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +44,7 @@ const RegisterForm = ({ register, errors, clearErrors, alerts, ...props }) => {
   };
 
   return (
-    <>
+    <Container maxWidth="sm" align="center">
       <Slide direction="left" in={true} mountOnEnter unmountOnExit>
         <form onSubmit={onSubmit}>
           <Paper elevation={2} className={classes.root}>
@@ -58,7 +59,7 @@ const RegisterForm = ({ register, errors, clearErrors, alerts, ...props }) => {
               </Grid>
 
               <Grid item>
-                <AlertMessage severity="error" type='registerAlert' />
+                <AlertMessage severity="error" type="registerAlert" />
               </Grid>
 
               <Grid item>
@@ -106,7 +107,7 @@ const RegisterForm = ({ register, errors, clearErrors, alerts, ...props }) => {
           </Paper>
         </form>
       </Slide>
-    </>
+    </Container>
   );
 };
 const mapStateToProps = (state) => ({

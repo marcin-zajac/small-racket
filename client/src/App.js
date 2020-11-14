@@ -8,7 +8,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
-import {LOGOUT} from'./actions/types'
+import { LOGOUT } from './actions/types';
+import Routes from './components/routing/Routes';
 
 function App() {
   useEffect(() => {
@@ -23,20 +24,12 @@ function App() {
   }, []);
   return (
     <Provider store={store}>
-      <Router>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Route path="/auth">
-            <AuthPage />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/user" />
-          </Route>
-          <Route path="/user">
-            <MainContent />
-          </Route>
-        </ThemeProvider>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <Routes />
+        </Router>
+      </ThemeProvider>
     </Provider>
   );
 }

@@ -66,7 +66,7 @@ function AppHeader({ title, subtitle, logout }) {
           <Button
             variant="outlined"
             component={Link}
-            // to="/"
+            to="/auth"
             onClick={logout}
           >
             Logout
@@ -79,6 +79,8 @@ function AppHeader({ title, subtitle, logout }) {
 
 AppHeader.propTypes = {
   logout: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
 };
 
 export default connect(null, { logout })(AppHeader);

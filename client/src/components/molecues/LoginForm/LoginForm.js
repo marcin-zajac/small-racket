@@ -9,6 +9,7 @@ import { login } from '../../../actions/auth';
 import { connect } from 'react-redux';
 import { getHelper } from '../../../utils/getHelper';
 import AlertMessage from '../../atoms/AlertMessage';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +46,7 @@ const LoginForm = ({ login, errors, isAuthenticated, token, ...props }) => {
   }
 
   return (
-    <>
+    <Container maxWidth="sm" align="center">
       <Slide direction="right" in={true} mountOnEnter unmountOnExit>
         <form onSubmit={onSubmit}>
           <Paper elevation={2} className={classes.root}>
@@ -95,7 +96,7 @@ const LoginForm = ({ login, errors, isAuthenticated, token, ...props }) => {
           </Paper>
         </form>
       </Slide>
-    </>
+    </Container>
   );
 };
 

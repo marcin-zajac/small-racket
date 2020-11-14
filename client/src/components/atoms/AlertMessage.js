@@ -13,15 +13,13 @@ const useStyles = makeStyles((theme) => ({
 function AlertMessage({ alerts, type, ...props }) {
   const classes = useStyles();
   const alertList = alerts[type]
-  console.log(alertList);
-
-  return alertList.map((alert) => (
-    <Alert {...props} className={classes.root}>{alert.msg}</Alert>
+  return alertList.map((alert, index) => (
+    <Alert {...props} key={index} className={classes.root}>{alert.msg}</Alert>
   ));
 }
 
 AlertMessage.propTypes = {
-  alerts: PropTypes.array.isRequired,
+  alerts: PropTypes.any,
   type: PropTypes.string.isRequired,
 };
 
