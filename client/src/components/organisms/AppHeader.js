@@ -51,7 +51,7 @@ function AppHeader({ title, subtitle, logout }) {
             {subtitle}
           </Typography>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={0}>
           <h2>
             <span role="img" aria-label="🧨">
               🧨
@@ -66,7 +66,7 @@ function AppHeader({ title, subtitle, logout }) {
           <Button
             variant="outlined"
             component={Link}
-            to="/auth"
+            to="/"
             onClick={logout}
           >
             Logout
