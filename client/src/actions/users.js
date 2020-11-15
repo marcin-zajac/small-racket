@@ -1,19 +1,28 @@
 import api from '../utils/api';
-import { GET_USERS, GET_USERS_ALERT } from "./types";
+import { GET_USERS, GET_USERS_ALERT, GET_CURRENT_USER } from './types';
 
-export const getAllUsers = (token) => async (dispatch) => {
+export const getAllUsers = () => async (dispatch) => {
   try {
     const res = await api.get('/users');
-    // TODO: get current user profilke by id from token
-    // const allUsers = [res.data]
-    // const currentUserProfile = allUsers.filter(user => user._id === token)
-    // console.log(currentUserProfile, token);
     dispatch({
       type: GET_USERS,
       payload: [res.data], // all users
     });
   } catch (error) {
-      const errors = error.response.data;
-      dispatch({ type: GET_USERS_ALERT, payload: [errors] });
+    const errors = error.response.data;
+    dispatch({ type: GET_USERS_ALERT, payload: [errors] });
+  }
+};
+export const getCurrentUser = () => async (dispatch) => {
+  try {
+    const res = await api.get('/users/me');
+
+    dispatch({
+      type: GET_CURRENT_USER,
+      payload: res.data[0],
+    });
+  } catch (error) {
+    const errors = error.response.data;
+    dispatch({ type: GET_USERS_ALERT, payload: [errors] });
   }
 };

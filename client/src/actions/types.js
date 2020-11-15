@@ -10,4 +10,5 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 // users
 export const GET_USERS = 'GET_USERS'
+export const GET_CURRENT_USER = 'GET_CURRENT_USER'
 export const GET_USERS_ALERT = 'GET_USERS_ALERT'

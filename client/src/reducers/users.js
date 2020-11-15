@@ -1,9 +1,9 @@
-import { GET_USERS } from '../actions/types';
+import { GET_USERS, GET_CURRENT_USER } from '../actions/types';
 
 // test
 const initialState = {
   allUsers: [],
-  currentUserProfile: {}
+  currentUser: []
 };
 
 export default function (state = initialState, action) {
@@ -13,6 +13,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         allUsers: payload,
+      };
+    case GET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: payload,
       };
   }
   return state;

@@ -12,7 +12,6 @@ const checkRole = require('../../middleware/checkRole');
 // @desc     get all users
 // @access   Private
 router.get('/', auth, async (req, res) => {
-  // router.get('/', auth, async (req, res) => {
   try {
     const filter = {};
     const allUsers = await User.find(filter);
@@ -21,6 +20,23 @@ router.get('/', auth, async (req, res) => {
     }
 
     res.json(allUsers);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    GET api/users/me
+// @desc     get current user
+// @access   Private
+router.get('/me', auth, async (req, res) => {
+  try {
+    const filter = {_id: req.user.id};
+    const user = await User.find(filter);
+    if (!user) {
+      return res.status(400).json({ msg: 'There is no users' });
+    }
+    res.json(user);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

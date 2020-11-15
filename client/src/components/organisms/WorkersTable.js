@@ -12,7 +12,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import Tooltip from '@material-ui/core/Tooltip';
 import { acmeWorkers } from '../../utils/placeholderData';
-import { getAllUsers } from '../../actions/users';
+import { getAllUsers, getCurrentUser } from '../../actions/users';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -74,9 +74,10 @@ const useStyles = makeStyles({
   },
 });
 
-function WorkersTable({ getAllUsers, token }) {
+function WorkersTable({ getAllUsers, getCurrentUser, allUsers, currentUser }) {
   useEffect(() => {
-    getAllUsers(token);
+    getAllUsers();
+    getCurrentUser();
   }, []);
 
   const classes = useStyles();
@@ -144,10 +145,14 @@ function WorkersTable({ getAllUsers, token }) {
 }
 
 const mapStateToProps = (state) => ({
-  token: state.auth.token,
+  allUsers: state.users.allUsers,
+  currentUser: state.users.currentUser,
 });
 WorkersTable.propTypes = {
   getAllUsers: PropTypes.func.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { getAllUsers })(WorkersTable);
+export default connect(mapStateToProps, { getAllUsers, getCurrentUser })(
+  WorkersTable
+);
