@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -12,6 +12,9 @@ import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import Tooltip from '@material-ui/core/Tooltip';
 import { acmeWorkers } from '../../utils/placeholderData';
+import { getAllUsers } from '../../actions/users';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const headCells = [
   {
@@ -56,12 +59,10 @@ function createData(workerName, department, email, phone, role, workStatus) {
   return { workerName, department, email, phone, workStatus };
 }
 
-
-
 const rows = [];
 acmeWorkers.forEach((worker) => {
   const data = createData(...worker);
-  rows.push(data)
+  rows.push(data);
 });
 
 const useStyles = makeStyles({
@@ -73,7 +74,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function WorkersTable() {
+function WorkersTable({ getAllUsers, token }) {
+  useEffect(() => {
+    getAllUsers(token);
+  }, []);
+
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -137,3 +142,12 @@ export default function WorkersTable() {
     </Paper>
   );
 }
+
+const mapStateToProps = (state) => ({
+  token: state.auth.token,
+});
+WorkersTable.propTypes = {
+  getAllUsers: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, { getAllUsers })(WorkersTable);

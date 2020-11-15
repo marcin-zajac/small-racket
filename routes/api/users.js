@@ -12,14 +12,15 @@ const checkRole = require('../../middleware/checkRole');
 // @desc     get all users
 // @access   Private
 router.get('/', auth, async (req, res) => {
+  // router.get('/', auth, async (req, res) => {
   try {
     const filter = {};
-    const all = await User.find(filter);
-    if (!all) {
+    const allUsers = await User.find(filter);
+    if (!allUsers) {
       return res.status(400).json({ msg: 'There is no users' });
     }
 
-    res.json(all);
+    res.json(allUsers);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -45,18 +46,24 @@ router.get('/:id', auth, checkObjectId('id'), async (req, res) => {
 // @route    DELETE api/users/:id
 // @desc     delete user by id
 // @access   Admin only
-router.delete('/:id', auth, checkRole("Admin") ,checkObjectId('id'), async (req, res) => {
-  try {
-    const user = await User.findOne({ _id: req.params.id });
-    if (!user) {
-      return res.status(400).json({ msg: 'User not defined' });
+router.delete(
+  '/:id',
+  auth,
+  checkRole('Admin'),
+  checkObjectId('id'),
+  async (req, res) => {
+    try {
+      const user = await User.findOne({ _id: req.params.id });
+      if (!user) {
+        return res.status(400).json({ msg: 'User not defined' });
+      }
+      await user.remove();
+      res.json({ msg: `User ${user.email} removed` });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
     }
-    await user.remove();
-    res.json({ msg: `User ${user.email} removed` });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
   }
-});
+);
 
 module.exports = router;

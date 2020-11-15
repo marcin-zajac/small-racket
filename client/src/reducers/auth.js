@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   // isAuthenticated: false,
-  isAuthenticated: true, // TODO: To preform correct auth functionality set isAuthenticated to flase
+  isAuthenticated: false, // TODO: To preform correct auth functionality set isAuthenticated to flase
   token: localStorage.getItem('token'),
 };
 
