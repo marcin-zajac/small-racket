@@ -3,7 +3,7 @@ import { GET_USERS, GET_CURRENT_USER } from '../actions/types';
 // test
 const initialState = {
   allUsers: [],
-  currentUser: []
+  currentUser: [],
 };
 
 export default function (state = initialState, action) {
@@ -19,6 +19,7 @@ export default function (state = initialState, action) {
         ...state,
         currentUser: payload,
       };
+    default:
+      return state;
   }
-  return state;
 }
