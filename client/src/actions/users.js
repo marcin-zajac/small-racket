@@ -26,3 +26,8 @@ export const getCurrentUser = () => async (dispatch) => {
     dispatch({ type: GET_USERS_ALERT, payload: [errors] });
   }
 };
+
+export const updateCurrentUserData = (formData) => async (dispatch) => {
+  console.log(formData);
+  // TODO: Update current ser data on server and return alert
+}

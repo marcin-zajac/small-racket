@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,6 +9,9 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { updateCurrentUserData } from '../../../actions/users';
+import { connect } from 'react-redux';
+
 import {
   Checkbox,
   FormControl,
@@ -64,7 +67,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-const MyProfileFormDialog = () => {
+const MyProfileFormDialog = ({ currentUser }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -77,12 +80,28 @@ const MyProfileFormDialog = () => {
     // TODO: update data in databasee
     setOpen(false);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // TODO: handle send form data
 
+  const [formData, setformData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    department: '',
+    role: '',
+  });
+  // const { firstName, lastName, email, phone, department } = formData;
+
+  const onChange = (e) => {
+    setformData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    updateCurrentUserData(formData);
+    console.log(formData);
+  };
+// FIXME: Department in form
+// TODO: form validtaion
   return (
     <div>
       <IconButton
@@ -102,7 +121,7 @@ const MyProfileFormDialog = () => {
           My profile data
         </DialogTitle>
         <DialogContent dividers>
-          <form id="my-data-form" onSubmit={handleSubmit}>
+          <form id="my-data-form" onSubmit={onSubmit}>
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <TextField
@@ -110,7 +129,8 @@ const MyProfileFormDialog = () => {
                   name="firstName"
                   label="First name"
                   fullWidth
-                  autoComplete="given-name"
+                  onChange={onChange}
+                  value={currentUser.firstName}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -119,7 +139,8 @@ const MyProfileFormDialog = () => {
                   name="lastName"
                   label="Last name"
                   fullWidth
-                  autoComplete="family-name"
+                  onChange={onChange}
+                  value={currentUser.lastName}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -131,12 +152,12 @@ const MyProfileFormDialog = () => {
                     xs={12}
                     labelId="department-select-label"
                     id="department-select"
-                    // value={age}
-                    // onChange={handleChange}
+                    // value={currentUser.department}
                     label="Age"
+                    onChange={onChange}
                   >
                     <MenuItem value="">
-                      <em>None</em>
+                      <em>{currentUser.department}</em>
                     </MenuItem>
                     <MenuItem value={10}>Department Of Some</MenuItem>
                     <MenuItem value={20}>Departmentt III</MenuItem>
@@ -149,8 +170,9 @@ const MyProfileFormDialog = () => {
                   id="email"
                   name="email"
                   label="Email"
-                  fullWidth
                   autoComplete="email"
+                  onChange={onChange}
+                  value={currentUser.email}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -159,7 +181,8 @@ const MyProfileFormDialog = () => {
                   name="phone"
                   label="Phone number"
                   fullWidth
-                  autoComplete="shipping postal-code"
+                  onChange={onChange}
+                  value={currentUser.phone}
                 />
               </Grid>
               <Grid item xs={9}>
@@ -168,7 +191,8 @@ const MyProfileFormDialog = () => {
                   name="role"
                   label="Role / Position"
                   fullWidth
-                  autoComplete="shipping country"
+                  onChange={onChange}
+                  value={currentUser.role}
                 />
               </Grid>
               <Grid item xs={9}>
@@ -177,7 +201,7 @@ const MyProfileFormDialog = () => {
                   name="avatar"
                   label="Avatar URL"
                   fullWidth
-                  autoComplete="shipping address-level2"
+                  onChange={onChange}
                 />
               </Grid>
             </Grid>
@@ -190,6 +214,7 @@ const MyProfileFormDialog = () => {
             color="primary"
             type="submit"
             form="my-data-form"
+            onChange={onChange}
           >
             Save changes
           </Button>
@@ -199,4 +224,11 @@ const MyProfileFormDialog = () => {
   );
 };
 
-export default MyProfileFormDialog;
+const mapStateToProps = (state) => ({
+  currentUser: state.users.currentUser,
+});
+
+// TODO: Set input values with user data from store
+export default connect(mapStateToProps, { updateCurrentUserData })(
+  MyProfileFormDialog
+);
