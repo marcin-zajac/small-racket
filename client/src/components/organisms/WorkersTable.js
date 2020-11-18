@@ -75,10 +75,11 @@ const useStyles = makeStyles({
 });
 
 function WorkersTable({ getAllUsers, getCurrentUser, allUsers, currentUser }) {
+  
   useEffect(() => {
     getAllUsers();
     getCurrentUser();
-  });
+  }, []);
 
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
