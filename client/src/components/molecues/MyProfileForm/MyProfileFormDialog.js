@@ -9,6 +9,16 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import SettingsIcon from '@material-ui/icons/Settings';
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@material-ui/core';
 
 const styles = (theme) => ({
   root: {
@@ -29,7 +39,11 @@ const DialogTitle = withStyles(styles)((props) => {
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
           <CloseIcon />
         </IconButton>
       ) : null}
@@ -50,7 +64,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function MyProfileFormDialog() {
+const MyProfileFormDialog = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -63,38 +77,126 @@ export default function MyProfileFormDialog() {
     // TODO: update data in databasee
     setOpen(false);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // TODO: handle send form data
+
+  };
 
   return (
     <div>
-
-      <IconButton color="primary" aria-label="user settings" component="span" onClick={handleClickOpen}>
-          <SettingsIcon />
-        </IconButton>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+      <IconButton
+        color="primary"
+        aria-label="user settings"
+        component="span"
+        onClick={handleClickOpen}
+      >
+        <SettingsIcon />
+      </IconButton>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           My profile data
         </DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-            auctor fringilla.
-          </Typography>
+          <form id="my-data-form" onSubmit={handleSubmit}>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <TextField
+                  id="firstName"
+                  name="firstName"
+                  label="First name"
+                  fullWidth
+                  autoComplete="given-name"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="lastName"
+                  name="lastName"
+                  label="Last name"
+                  fullWidth
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl style={{ minWidth: 272 }}>
+                  <InputLabel id="department-select-label">
+                    Department
+                  </InputLabel>
+                  <Select
+                    xs={12}
+                    labelId="department-select-label"
+                    id="department-select"
+                    // value={age}
+                    // onChange={handleChange}
+                    label="Age"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Department Of Some</MenuItem>
+                    <MenuItem value={20}>Departmentt III</MenuItem>
+                    <MenuItem value={30}>Thirty Dep.</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="email"
+                  name="email"
+                  label="Email"
+                  fullWidth
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="phone"
+                  name="phone"
+                  label="Phone number"
+                  fullWidth
+                  autoComplete="shipping postal-code"
+                />
+              </Grid>
+              <Grid item xs={9}>
+                <TextField
+                  id="role"
+                  name="role"
+                  label="Role / Position"
+                  fullWidth
+                  autoComplete="shipping country"
+                />
+              </Grid>
+              <Grid item xs={9}>
+                <TextField
+                  id="avatar"
+                  name="avatar"
+                  label="Avatar URL"
+                  fullWidth
+                  autoComplete="shipping address-level2"
+                />
+              </Grid>
+            </Grid>
+          </form>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleSave} color="primary">
+          <Button
+            autoFocus
+            onSubmit={handleSave}
+            color="primary"
+            type="submit"
+            form="my-data-form"
+          >
             Save changes
           </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-}
+};
+
+export default MyProfileFormDialog;
