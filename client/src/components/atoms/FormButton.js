@@ -10,11 +10,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
 }));
-export default function FormButton(props) {
+export default function FormButton({value, ...props}) {
   const classes = useStyles(props);
-  const { value } = props;
   return (
-    <Button variant="outlined" type="submit" className={classes.root}>
+    <Button variant="outlined" className={classes.root} {...props}>
       {value}
     </Button>
   );
