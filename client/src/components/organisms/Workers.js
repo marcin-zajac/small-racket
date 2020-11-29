@@ -1,9 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export default function Workers() {
-    return (
-        <h1>
-            Workers.js
-        </h1>
-    )
+  return <h1>Workers.js</h1>;
 }

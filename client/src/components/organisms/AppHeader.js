@@ -86,7 +86,12 @@ function AppHeader({ title, subtitle, logout }) {
           </h2>
         </Grid>
         <Grid item>
-          <Grid container justify="space-between" alignItems='stretch' direction='row'>
+          <Grid
+            container
+            justify="space-between"
+            alignItems="stretch"
+            direction="row"
+          >
             <Button
               variant="outlined"
               component={Link}

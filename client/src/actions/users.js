@@ -30,4 +30,4 @@ export const getCurrentUser = () => async (dispatch) => {
 export const updateCurrentUserData = (formData) => async (dispatch) => {
   console.log(formData);
   // TODO: Update current ser data on server and return alert
-}
+};

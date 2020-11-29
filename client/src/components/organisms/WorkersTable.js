@@ -75,7 +75,6 @@ const useStyles = makeStyles({
 });
 
 function WorkersTable({ getAllUsers, getCurrentUser, allUsers, currentUser }) {
-  
   useEffect(() => {
     getAllUsers();
     getCurrentUser();

@@ -31,7 +31,7 @@ router.get('/', auth, async (req, res) => {
 // @access   Private
 router.get('/me', auth, async (req, res) => {
   try {
-    const filter = {_id: req.user.id};
+    const filter = { _id: req.user.id };
     const user = await User.find(filter);
     if (!user) {
       return res.status(400).json({ msg: 'There is no users' });

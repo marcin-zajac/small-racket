@@ -12,9 +12,11 @@ const useStyles = makeStyles((theme) => ({
 
 function AlertMessage({ alerts, type, ...props }) {
   const classes = useStyles();
-  const alertList = alerts[type]
+  const alertList = alerts[type];
   return alertList.map((alert, index) => (
-    <Alert {...props} key={index} className={classes.root}>{alert.msg}</Alert>
+    <Alert {...props} key={index} className={classes.root}>
+      {alert.msg}
+    </Alert>
   ));
 }
 

@@ -5,36 +5,39 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach by Process ID",
-      "processId": "${command:PickProcess}",
-      "request": "attach",
+      "name": "Server",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "program": "${workspaceFolder}/server.js",
+      "restart": true,
+      "runtimeExecutable": "nodemon",
       "skipFiles": [
+        "${workspaceFolder}/node_modules/**/*.js",
         "<node_internals>/**"
       ],
       "type": "pwa-node"
     },
 
     {
-      "name": "Attach",
-      "port": 9229,
-      "request": "attach",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node"
-    },
-    {
-      "name": "Launch Edge",
+      "name": "Client",
       "request": "launch",
       "type": "pwa-msedge",
-      "userDataDir": true,
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}"
-    },
+      "webRoot": "${workspaceFolder}/client/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      },
+      "skipFiles": [
+        "${workspaceFolder}/client/node_modules/**/*.js",
+        "${workspaceFolder}/node_modules/**/*.js"
+      ]
+    }
+  ],
+  "compounds": [
     {
-      "name": "Attach to Edge",
-      "port": 2015,
-      "request": "attach",
-      "type": "pwa-msedge",
-      "webRoot": "${workspaceFolder}"
+      "name": "Server/Client",
+      "configurations": ["Server", "Client"]
     }
   ]
 }

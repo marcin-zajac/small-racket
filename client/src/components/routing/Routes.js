@@ -12,7 +12,7 @@ export default function Routes() {
       <Route exact path="/auth" component={Rocket} />
       <PrivateRoute path="/user" component={MainContent} />
       <Route exact path="/">
-        <Redirect to="/user" /> 
+        <Redirect to="/user" />
       </Route>
     </Switch>
   );

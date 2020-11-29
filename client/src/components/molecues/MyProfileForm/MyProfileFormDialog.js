@@ -100,8 +100,8 @@ const MyProfileFormDialog = ({ currentUser }) => {
     updateCurrentUserData(formData);
     console.log(formData);
   };
-// FIXME: Department in form
-// TODO: form validtaion
+  // FIXME: Department in form
+  // TODO: form validtaion
   return (
     <div>
       <IconButton

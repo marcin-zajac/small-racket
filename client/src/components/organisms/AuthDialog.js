@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dialog, IconButton, Typography, Button} from '@material-ui/core';
+import { Dialog, IconButton, Typography, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
@@ -50,7 +50,7 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
-export default function MyProfileFormDialog({name, formComponent}) {
+export default function MyProfileFormDialog({ name, formComponent }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -83,9 +83,7 @@ export default function MyProfileFormDialog({name, formComponent}) {
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           {name}
         </DialogTitle>
-        <DialogContent dividers>
-          {formComponent}
-        </DialogContent>
+        <DialogContent dividers>{formComponent}</DialogContent>
       </Dialog>
     </div>
   );

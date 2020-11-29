@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
 }));
-export default function FormButton({value, ...props}) {
+export default function FormButton({ value, ...props }) {
   const classes = useStyles(props);
   return (
     <Button variant="outlined" className={classes.root} {...props}>
