@@ -23,15 +23,15 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      res.status(400).json({ errors: errors.array() });
+      return;
     }
 
     try {
       const user = await User.findOne({ email: req.body.email }).exec();
       if (user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'User already exists' }] });
+        res.status(400).json({ errors: [{ msg: 'User already exists' }] });
+        return;
       }
 
       const { firstName, lastName, email, password, role } = req.body;
@@ -49,6 +49,7 @@ router.post(
 
       res.status(200).json({ msg: 'ok', user: newUser });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error.message);
       res.status(500).send('Server Error');
     }
@@ -73,7 +74,7 @@ router.post(
 
     const { email, password } = req.body;
     try {
-      let user = await User.findOne({ email });
+      const user = await User.findOne({ email });
 
       if (!user) {
         return res
@@ -105,6 +106,7 @@ router.post(
         }
       );
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error.message);
       res.status(500).send('Server error');
     }

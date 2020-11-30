@@ -4,13 +4,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import AuthDialog from './AuthDialog';
 import LoginForm from '../molecues/LoginForm/LoginForm';
 import RegisterForm from '../molecues/RegisterForm/RegisterForm';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(4),
     alignItems: 'stretch',
   },
 }));
-export const Navigation = (props) => {
+
+const Navigation = (props) => {
   const classes = useStyles(props);
 
   return (
@@ -22,3 +24,6 @@ export const Navigation = (props) => {
     </nav>
   );
 };
+
+
+export default Navigation

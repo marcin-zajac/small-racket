@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import theme from './theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
@@ -8,6 +7,7 @@ import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './actions/types';
 import Routes from './components/routing/Routes';
+import theme from './theme';
 
 function App() {
   useEffect(() => {

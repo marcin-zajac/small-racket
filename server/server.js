@@ -1,9 +1,8 @@
 const express = require('express');
 // const bodyParser = require('body-parser');
 const path = require('path');
-const connectDB = require('./config/db');
-
 const passport = require('passport');
+const connectDB = require('./config/db');
 require('./config/passport/setup')(passport);
 
 // initialize express app
@@ -26,6 +25,7 @@ app.get('/api', function (req, res) {
 app.use('/api/users', require('./routes/api/auth'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/protected', require('./routes/api/protected'));
+
 app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -34,5 +34,6 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () =>
+  // eslint-disable-next-line no-console
   console.log(`Server started on http://localhost:${PORT}`)
 );

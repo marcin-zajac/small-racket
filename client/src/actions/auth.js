@@ -16,16 +16,13 @@ export const login = (email, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data, // Token
     });
-    console.log('TOKEN', res.data);
   } catch (error) {
-    const errors = error.response.data.errors;
+    const { errors } = error.response.data;
     if ((error && error.response.status === 400) || 500) {
-      console.log('status 400', error.response.data);
       dispatch({ type: LOGIN_ALERT, payload: errors });
       return;
     }
     if (error) {
-      const errors = error.response.data.errors;
       dispatch({ type: LOGIN_FAIL, payload: errors });
     }
   }
@@ -46,11 +43,9 @@ export const register = (email, password, password2) => async (dispatch) => {
       password,
       password2,
     });
-    console.log(res.data);
   } catch (error) {
-    const errors = error.response.data.errors;
+    const { errors } = error.response.data;
     if ((error && error.response.status === 400) || 500) {
-      console.log('status 400', error.response.data);
       dispatch({ type: REGISTER_ALERT, payload: errors });
       return;
     }
