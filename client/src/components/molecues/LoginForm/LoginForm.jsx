@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import FormButton from '../../atoms/FormButton';
 import { Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import AuthIcon from '../../atoms/AuthIcon';
-import { login } from '../../../actions/auth';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import AuthIcon from '../../atoms/AuthIcon';
+import { login } from '../../../actions/auth';
+import FormButton from '../../atoms/FormButton';
 import { getHelper } from '../../../utils/getHelper';
 import AlertMessage from '../../atoms/AlertMessage';
 

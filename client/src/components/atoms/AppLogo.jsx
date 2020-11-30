@@ -13,7 +13,7 @@ export default function AppLogo(props) {
   return (
     <Typography variant="h4" component="h1" className={classes.root}>
       <Box fontWeight="fontWeightBold">
-        \\\Small Rocket{' '}
+        \\\Small Rocket
         <span role="img" aria-label="rocket">
           🚀
         </span>

@@ -74,7 +74,7 @@ function AppHeader({ title, subtitle, logout }) {
             {subtitle}
           </Typography>
         </Grid>
-        <Grid item xs={0}>
+        <Grid item>
           <h2>
             <span role="img" aria-label="🧨">
               🧨

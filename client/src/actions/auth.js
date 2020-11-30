@@ -18,6 +18,7 @@ export const login = (email, password) => async (dispatch) => {
     });
   } catch (error) {
     const { errors } = error.response.data;
+    
     if ((error && error.response.status === 400) || 500) {
       dispatch({ type: LOGIN_ALERT, payload: errors });
       return;

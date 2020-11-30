@@ -14,6 +14,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { acmeWorkers } from '../../utils/placeholderData';
 import { getAllUsers, getCurrentUser } from '../../actions/users';
 import { connect } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 
 const headCells = [
@@ -84,7 +85,7 @@ function WorkersTable({ getAllUsers, getCurrentUser, allUsers, currentUser }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (newPage) => {
     setPage(newPage);
   };
 
@@ -99,7 +100,6 @@ function WorkersTable({ getAllUsers, getCurrentUser, allUsers, currentUser }) {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {' '}
               {headCells.map((column) => (
                 <TableCell
                   key={column.id}
@@ -116,7 +116,7 @@ function WorkersTable({ getAllUsers, getCurrentUser, allUsers, currentUser }) {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover tabIndex={-1} key={row.code}>
+                  <TableRow hover tabIndex={-1} key={uuidv4()}>
                     {headCells.map((column) => {
                       const value = row[column.id];
                       return (

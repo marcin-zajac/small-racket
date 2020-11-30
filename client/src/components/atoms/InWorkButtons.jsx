@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     width: '100%',
     '& .MuiToggleButton-root': {
@@ -12,9 +12,9 @@ const useStyles = makeStyles((theme) => ({
   },
   workingBtn: {},
   notWorkingBtn: {},
-}));
+});
 
-export default function InWorkButtons(props) {
+export default function InWorkButtons() {
   const classes = useStyles();
   // TODO: get working state from database (check is worker in work now and set button group)
   const [active, setActive] = useState(true);
@@ -22,7 +22,6 @@ export default function InWorkButtons(props) {
   const handleActive = (event, newActive) => {
     if (newActive !== null) {
       setActive(newActive);
-      console.log(active);
       // TODO: Update status in database
     }
   };

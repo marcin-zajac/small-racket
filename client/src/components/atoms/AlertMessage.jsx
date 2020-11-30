@@ -3,6 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { v4 as uuidv4 } from 'uuid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,11 +11,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AlertMessage({ alerts, type, ...props }) {
+
+function AlertMessage({alerts, type, ...props }) {
   const classes = useStyles();
   const alertList = alerts[type];
-  return alertList.map((alert, index) => (
-    <Alert {...props} key={index} className={classes.root}>
+  return alertList.map((alert) => (
+    <Alert {...props} key={uuidv4()} className={classes.root}>
       {alert.msg}
     </Alert>
   ));

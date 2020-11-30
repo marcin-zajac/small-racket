@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import AppLogo from '../atoms/AppLogo';
-import { Navigation } from '../organisms/Navigation';
+import  Navigation  from '../organisms/Navigation';
 import { Container } from '@material-ui/core';
 
 export default function AuthPage() {
