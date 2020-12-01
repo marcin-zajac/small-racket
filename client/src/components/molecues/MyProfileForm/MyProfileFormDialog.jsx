@@ -156,7 +156,7 @@ const MyProfileFormDialog = ({ currentUser }) => {
                     label="Age"
                     onChange={onChange}
                   >
-                    <MenuItem value="">
+                    <MenuItem value="any">
                       <em>{currentUser.department}</em>
                     </MenuItem>
                     <MenuItem value={10}>Department Of Some</MenuItem>

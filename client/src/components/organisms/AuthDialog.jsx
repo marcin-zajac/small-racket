@@ -37,9 +37,6 @@ const DialogTitle = withStyles(styles)((props) => {
 });
 
 const DialogContent = withStyles((theme) => ({
-  display: 'flex',
-  marginTop: theme.spacing(5),
-  minHeight: theme.spacing(56),
   root: {
     display: 'flex',
     flexDirection: 'column',
