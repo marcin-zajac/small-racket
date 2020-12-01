@@ -12,9 +12,8 @@ import {
   Portal,
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/auth';
-import Rocket from '../atoms/Rocket';
-import MyProfileFormDialog from '../molecues/MyProfileForm/MyProfileFormDialog';
+import { logout } from '../../store/auth/authActions';
+import MyProfileFormDialog from '../molecues/MyProfileFormDialog';
 
 const useStyles = makeStyles((theme) => ({
   root: {

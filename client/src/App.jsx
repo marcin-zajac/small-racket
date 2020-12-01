@@ -3,9 +3,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './store/store';
 import setAuthToken from './utils/setAuthToken';
-import { LOGOUT } from './actions/types';
+import { LOGOUT } from './store/actionTypes';
 import Routes from './components/routing/Routes';
 import theme from './theme';
 

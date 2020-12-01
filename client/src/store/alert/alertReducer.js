@@ -1,4 +1,4 @@
-import { LOGIN_ALERT, REGISTER_ALERT, GET_USERS_ALERT } from '../actions/types';
+import { LOGIN_ALERT, REGISTER_ALERT, GET_USERS_ALERT } from '../actionTypes';
 
 const initialState = {
   loginAlert: [],

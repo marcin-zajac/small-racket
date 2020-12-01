@@ -5,11 +5,11 @@ import {
   REGISTER_FAIL,
   // REGISTER_SUCESS,
   LOGOUT,
-} from '../actions/types';
+} from '../actionTypes';
 
 const initialState = {
   // isAuthenticated: false,
-  isAuthenticated: false, // TODO: To preform correct auth functionality set isAuthenticated to flase
+  isAuthenticated: true, // TODO: To preform correct auth functionality set isAuthenticated to flase
   token: localStorage.getItem('token'),
 };
 

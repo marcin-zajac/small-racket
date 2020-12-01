@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import FormButton from '../atoms/FormButton';
 import { Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Redirect } from 'react-router-dom';
+import AuthIcon from '../atoms/AuthIcon';
+import { register, clearErrors } from '../../store/auth/authActions';
 import { connect } from 'react-redux';
-import AuthIcon from '../../atoms/AuthIcon';
-import { login } from '../../../actions/auth';
-import FormButton from '../../atoms/FormButton';
-import { getHelper } from '../../../utils/getHelper';
-import AlertMessage from '../../atoms/AlertMessage';
+import { getHelper } from '../../utils/getHelper';
+import AlertMessage from '../atoms/AlertMessage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,60 +20,52 @@ const useStyles = makeStyles((theme) => ({
   formBtn: { marginTop: theme.spacing(5) },
 }));
 
-const LoginForm = ({
-  login,
-  errors,
-  clearErrors,
-  alerts,
-  isAuthenticated,
-  ...props
-}) => {
+const RegisterForm = ({ register, errors, clearErrors, alerts, ...props }) => {
   const classes = useStyles(props);
 
   const [formData, setformData] = useState({
     email: '',
     password: '',
+    password2: '',
   });
-  const { email, password } = formData;
+  const { email, password, password2 } = formData;
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    login(email, password);
+    register(email, password, password2);
   };
 
   const onChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
+    if (password === e.target.value || password2 === e.target.value) {
+      clearErrors();
+    }
   };
-  // Redirect if loged in
-  if (isAuthenticated) {
-    return <Redirect to="/user/dashboard" />;
-  }
 
   return (
     <form onSubmit={onSubmit}>
       <Grid container direction="column" justify="center" alignItems="stretch">
         <Grid container justify="center">
-          <AuthIcon login />
+          <AuthIcon register />
         </Grid>
 
         <Grid item>
-          <AlertMessage severity="error" type="loginAlert" />
+          <AlertMessage severity="error" type="registerAlert" />
         </Grid>
 
         <Grid item>
           <TextField
             error={getHelper(errors, 'email').isError}
             helperText={getHelper(errors, 'email').message}
-            type="email"
             name="email"
             label="Email"
+            type="email"
             onChange={onChange}
             value={email}
             fullWidth
           />
         </Grid>
-
-        <Grid item>
+        <Grid>
           <TextField
             error={getHelper(errors, 'password').isError}
             helperText={getHelper(errors, 'password').message}
@@ -86,21 +77,31 @@ const LoginForm = ({
             fullWidth
           />
         </Grid>
-
+        <Grid>
+          <TextField
+            error={getHelper(errors, 'password2').isError}
+            helperText={getHelper(errors, 'password2').message}
+            name="password2"
+            label="retype password"
+            type="password"
+            value={password2}
+            onChange={onChange}
+            fullWidth
+          />
+        </Grid>
         <Grid item sm></Grid>
 
         <Grid className={classes.formBtn} item>
-          <FormButton value="login" type="submit" />
+          <FormButton value="register" type="submit" />
         </Grid>
       </Grid>
     </form>
   );
 };
-
 const mapStateToProps = (state) => ({
   errors: state.auth.errors,
-  isAuthenticated: state.auth.isAuthenticated,
-  token: state.auth.token,
+  alerts: state.alert,
 });
-
-export default connect(mapStateToProps, { login })(LoginForm);
+export default connect(mapStateToProps, { register, clearErrors })(
+  RegisterForm
+);

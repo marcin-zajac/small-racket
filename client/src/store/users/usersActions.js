@@ -1,5 +1,5 @@
-import api from '../utils/api';
-import { GET_USERS, GET_USERS_ALERT, GET_CURRENT_USER } from './types';
+import api from '../../utils/api';
+import { GET_USERS, GET_USERS_ALERT, GET_CURRENT_USER } from '../actionTypes';
 
 export const getAllUsers = () => async (dispatch) => {
   try {

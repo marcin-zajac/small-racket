@@ -1,4 +1,4 @@
-import api from '../utils/api';
+import api from '../../utils/api';
 import {
   CLEAR_ERRORS,
   LOGIN_FAIL,
@@ -7,7 +7,7 @@ import {
   REGISTER_ALERT,
   LOGIN_SUCCESS,
   LOGOUT,
-} from './types';
+} from '../actionTypes';
 
 export const login = (email, password) => async (dispatch) => {
   try {

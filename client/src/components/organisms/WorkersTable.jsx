@@ -12,7 +12,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import Tooltip from '@material-ui/core/Tooltip';
 import { acmeWorkers } from '../../utils/placeholderData';
-import { getAllUsers, getCurrentUser } from '../../actions/users';
+import { getAllUsers, getCurrentUser } from '../../store/users/usersActions';
 import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';

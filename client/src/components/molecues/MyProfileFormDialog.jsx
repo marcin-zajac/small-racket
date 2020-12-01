@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { updateCurrentUserData } from '../../../actions/users';
+import { updateCurrentUserData } from '../../store/users/usersActions';
 import { connect } from 'react-redux';
 
 import {

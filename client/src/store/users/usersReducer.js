@@ -1,4 +1,4 @@
-import { GET_USERS, GET_CURRENT_USER } from '../actions/types';
+import { GET_USERS, GET_CURRENT_USER } from '../actionTypes';
 
 // test
 const initialState = {
