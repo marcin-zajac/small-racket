@@ -35,9 +35,9 @@ const UserSchema = new mongoose.Schema({
     default: utils.status.AVAILABLE,
   },
   workStatus: {
-    type: Boolean,
-    required: true,
-    default: false,
+    type: String,
+    enum: Object.values(utils.workStatus),
+    default: utils.workStatus.NOT_WORK,
   },
 });
 

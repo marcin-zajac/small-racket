@@ -9,6 +9,8 @@ import { Chip, Link } from '@material-ui/core';
 import TableAvatar from '../atoms/TableAvatar';
 import { v4 as uuidv4 } from 'uuid';
 import TableStatusChip from '../atoms/TableStatusChip';
+import TableWorkStatus from '../atoms/TableWorkStatus';
+
 
 const useStyles = makeStyles({
   root: {
@@ -60,8 +62,18 @@ const columns = [
       </Link>
     ),
   },
-
   { field: 'phone', headerName: 'Phone number', width: 130 },
+  {
+    field: 'workingStatus',
+    headerName: 'Working status',
+    sortable: false,
+    width: 150,
+    renderCell: (params) => {
+      const workStatus = params.getValue('workStatus');
+
+      return <TableWorkStatus workStatus={workStatus} />;
+    },
+  },
 ];
 
 const WorkersDataGrid = ({ allUsers, getAllUsers, getCurrentUser }) => {
