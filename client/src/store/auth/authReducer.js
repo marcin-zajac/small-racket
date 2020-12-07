@@ -8,8 +8,7 @@ import {
 } from '../actionTypes';
 
 const initialState = {
-  // isAuthenticated: false,
-  isAuthenticated: true, // TODO: To preform correct auth functionality set isAuthenticated to flase
+  isAuthenticated: false,
   token: localStorage.getItem('token'),
 };
 

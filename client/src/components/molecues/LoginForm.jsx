@@ -32,8 +32,9 @@ const LoginForm = ({
   const classes = useStyles(props);
 
   const [formData, setformData] = useState({
-    email: '',
-    password: '',
+    // TODO: Remove login data
+    email: 'marvin@acme.com',
+    password: '123456',
   });
   const { email, password } = formData;
 
