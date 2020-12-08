@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Grid, Button } from '@material-ui/core';
 import AppLogo from '../atoms/AppLogo';
 import { Link } from 'react-router-dom';
 import InWorkButtons from '../atoms/InWorkButtons';
+import AppBarAvatar from '../molecues/AppBarAvatar';
+import { getCurrentUser } from '../../store/users/usersActions';
+
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,9 +18,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#253053',
     padding: theme.spacing(3),
   },
+  avatar: { display: 'flex', justifyContent: 'center' },
 }));
 
-export default function AppBar() {
+function AppBar({ getCurrentUser, currentUser }) {
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
   const classes = useStyles();
 
   return (
@@ -23,7 +32,7 @@ export default function AppBar() {
       container
       direction="column"
       justify="space-around"
-      alignItems="stretch"
+      // alignItems="flex-start"
       className={classes.root}
     >
       <Grid item>
@@ -33,7 +42,9 @@ export default function AppBar() {
           </Button>
         </Link>
       </Grid>
-      <Grid item xs={2}></Grid>
+      <Grid item className={classes.avatar}>
+        <AppBarAvatar user={currentUser}/>
+      </Grid>
       <Grid item>
         <Button
           component={Link}
@@ -63,3 +74,12 @@ export default function AppBar() {
     </Grid>
   );
 }
+
+const mapStateToProps = (state) => ({
+  currentUser: state.users.currentUser,
+});
+AppBar.propTypes = {
+  getCurrentUser: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, { getCurrentUser })(AppBar);

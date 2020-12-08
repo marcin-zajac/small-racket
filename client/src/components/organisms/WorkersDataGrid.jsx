@@ -5,9 +5,8 @@ import { DataGrid } from '@material-ui/data-grid';
 import PropTypes from 'prop-types';
 import { getAllUsers, getCurrentUser } from '../../store/users/usersActions';
 import { connect } from 'react-redux';
-import { Chip, Link } from '@material-ui/core';
+import { Link } from '@material-ui/core';
 import TableAvatar from '../atoms/TableAvatar';
-import { v4 as uuidv4 } from 'uuid';
 import TableStatusChip from '../atoms/TableStatusChip';
 import TableWorkStatus from '../atoms/TableWorkStatus';
 
