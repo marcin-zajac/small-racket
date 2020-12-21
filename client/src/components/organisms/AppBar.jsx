@@ -53,7 +53,7 @@ function AppBar({ getCurrentUser, currentUser }) {
           color="primary"
           fullWidth
         >
-          Who is on work?
+          Who is at work?
         </Button>
       </Grid>
       <Grid item>
@@ -70,7 +70,8 @@ function AppBar({ getCurrentUser, currentUser }) {
       <Grid item>
         <InWorkButtons />
       </Grid>
-      <Grid item xs={6}></Grid>
+      <Grid item xs={2} />
+      <Grid item xs={8}></Grid>
     </Grid>
   );
 }

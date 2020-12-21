@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AppBarAvatar = ({ user }) => {
   const classes = useStyles();
-  const initials = `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`;
+  const initials = `XZ`;
 
   return (
     <>
