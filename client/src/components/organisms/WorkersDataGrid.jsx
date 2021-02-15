@@ -28,9 +28,9 @@ const columns = [
     sortable: false,
     width: 90,
     renderCell: (params) => {
-      const role = params.getValue('role');
-      const avatarUrl = params.getValue('avatarUrl');
-      const initials = params.getValue('initials');
+      const role = params.row.role;
+      const avatarUrl = params.row.avatarUrl;
+      const initials = params.row.initials;
       return (
         <TableAvatar role={role} avatarUrl={avatarUrl} initials={initials} />
       );
@@ -57,7 +57,7 @@ const columns = [
     width: 270,
     renderCell: (params) => (
       <Link href="mailto:acme@usa.com" onClick={null}>
-        {params.getValue('email')}
+        {params.row.email}
       </Link>
     ),
   },
@@ -68,18 +68,15 @@ const columns = [
     sortable: false,
     width: 150,
     renderCell: (params) => {
-      const workStatus = params.getValue('workStatus');
+      const workStatus = params.row.workStatus;
 
       return <TableWorkStatus workStatus={workStatus} />;
     },
   },
 ];
 
-const WorkersDataGrid = ({ allUsers, getAllUsers, getCurrentUser }) => {
-  useEffect(() => {
-    getAllUsers();
-    getCurrentUser();
-  }, []);
+const WorkersDataGrid = ({ allUsers }) => {
+
   const classes = useStyles();
 
   return (
@@ -102,8 +99,7 @@ const mapStateToProps = (state) => ({
   currentUser: state.users.currentUser,
 });
 WorkersDataGrid.propTypes = {
-  getAllUsers: PropTypes.func.isRequired,
-  getCurrentUser: PropTypes.func.isRequired,
+  allUsers: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, { getAllUsers, getCurrentUser })(

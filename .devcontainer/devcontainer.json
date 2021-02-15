@@ -1,0 +1,13 @@
+{
+  "name": "JS ENV",
+  "dockerFile": "Dockerfile",
+  "appPort": [3000, 5000],
+  "runArgs": ["-u", "node"],
+  "settings": {
+    "workbench.colorTheme": "Cobalt2",
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "postCreateCommand": "yarn install",
+  "extensions": ["esbenp.prettier-vscode", "wesbos.theme-cobalt2","msjsdiag.debugger-for-chrome"
+  ],
+}
